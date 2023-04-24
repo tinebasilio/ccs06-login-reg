@@ -2,6 +2,10 @@
 
 require "config.php";
 
+if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
+    header('Location: login.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +16,7 @@ require "config.php";
 	<title>Welcome</title>
 </head>
 <body>
-<h2>Welcome</h2>
+<h2>Welcome <?php echo $_SESSION['fullname']; ?>!</h2>
 
 <h4>Ecclesiastes 3:1-8</h4>
 <pre>
@@ -33,9 +37,12 @@ There is a time for everything,
      a time to love and a time to hate,
     a time for war and a time for peace.
 </pre>
+
+<a href="logout.php">LOGOUT</a>
 </body>
 </html>
 
+<hr />
 <pre>
 <?php
 var_dump($_SESSION);
