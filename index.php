@@ -35,3 +35,9 @@ There is a time for everything,
 </pre>
 </body>
 </html>
+
+<pre>
+<?php
+var_dump($_SESSION);
+?>
+</pre>

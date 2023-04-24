@@ -69,7 +69,7 @@ class User
 			";
 			$conn->exec($sql);
 			// echo "<li>Executed SQL query " . $sql;
-			return true;
+			return $conn->lastInsertId();
 		} catch (PDOException $e) {
 			error_log($e->getMessage());
 		}

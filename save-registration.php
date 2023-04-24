@@ -10,7 +10,14 @@ try {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$result = User::register($first_name, $last_name, $email, $password);
+
 	if ($result) {
+		$_SESSION['is_logged_in'] = true;
+		$_SESSION['user'] = [
+			'id' => $result,
+			'fullname' => $first_name . ' ' . $last_name,
+			'email' => $email
+		];
 		header('Location: index.php');
 	}
 
