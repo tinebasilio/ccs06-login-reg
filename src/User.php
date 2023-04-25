@@ -38,6 +38,29 @@ class User
 		return $this->email;
 	}
 
+	public static function getById($id)
+	{
+		global $conn;
+
+		try {
+			$sql = "
+				SELECT * FROM users
+				WHERE id=:id
+				LIMIT 1
+			";
+			$statement = $conn->prepare($sql);
+			$statement->execute([
+				'id' => $id
+			]);
+			$result = $statement->fetchObject('App\User');
+			return $result;
+		} catch (PDOException $e) {
+			error_log($e->getMessage());
+		}
+
+		return null;
+	}
+
 	public static function attemptLogin($email, $pass)
 	{
 		global $conn;

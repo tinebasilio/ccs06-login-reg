@@ -4,6 +4,8 @@ require "config.php";
 
 use App\User;
 
+// Save the user information, and automatically login the user
+
 try {
 	$first_name = $_POST['first_name'];
 	$last_name = $_POST['last_name'];
@@ -12,6 +14,9 @@ try {
 	$result = User::register($first_name, $last_name, $email, $password);
 
 	if ($result) {
+
+		// Set the logged in session variable and redirect user to index page
+
 		$_SESSION['is_logged_in'] = true;
 		$_SESSION['user'] = [
 			'id' => $result,

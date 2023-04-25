@@ -2,9 +2,14 @@
 
 require "config.php";
 
+use App\User;
+
+// Only logged in user should be able to open this page
 if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
     header('Location: login.php');
 }
+
+$user = User::getById($_SESSION['user']['id']);
 
 ?>
 
@@ -16,7 +21,44 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
 	<title>Welcome</title>
 </head>
 <body>
-<h2>Welcome <?php echo $_SESSION['user']['fullname']; ?> &lt;<?php echo $_SESSION['user']['email']; ?>&gt;!</h2>
+<h1>Welcome <?php echo $_SESSION['user']['fullname']; ?></h1>
+
+<h2>User Information</h2>
+
+<table bgcolor="gold" border="1" cellpadding="10">
+    <tr>
+        <td>User ID</td>
+        <td>
+            <strong>
+                <?php echo $user->getId();?>
+            </strong>
+        </td>
+    </tr>
+    <tr>
+        <td>First Name</td>
+        <td>
+            <strong>
+                <?php echo $user->getFirstName();?>
+            </strong>
+        </td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td>
+            <strong>
+                <?php echo $user->getLastName();?>
+            </strong>
+        </td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>
+            <strong>
+                <?php echo $user->getEmail();?>
+            </strong>
+        </td>
+    </tr>
+</table>
 
 <h4>Ecclesiastes 3:1-8</h4>
 <pre>
@@ -44,6 +86,8 @@ There is a time for everything,
 
 <hr />
 <pre>
+SESSION DATA
+
 <?php
 var_dump($_SESSION);
 ?>

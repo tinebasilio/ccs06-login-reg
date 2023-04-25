@@ -2,6 +2,7 @@
 
 require "config.php";
 
+// If the session variable is already set, automatically redirect the user to index page
 if (isset($_SESSION['is_logged_in'])) {
 	if ($_SESSION['is_logged_in']) {
 		header('Location: index.php');
