@@ -30,7 +30,7 @@ if (isset($_SESSION['is_logged_in'])) {
 	</div>
 	<div>
 		<button>
-			Register User
+			Login
 		</button>	
 	</div>
 </form>

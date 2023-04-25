@@ -16,7 +16,7 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
 	<title>Welcome</title>
 </head>
 <body>
-<h2>Welcome <?php echo $_SESSION['fullname']; ?>!</h2>
+<h2>Welcome <?php echo $_SESSION['user']['fullname']; ?> &lt;<?php echo $_SESSION['user']['email']; ?>&gt;!</h2>
 
 <h4>Ecclesiastes 3:1-8</h4>
 <pre>

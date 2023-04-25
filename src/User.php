@@ -13,6 +13,11 @@ class User
 	protected $pass;
 	protected $created_at;
 
+	public function getId()
+	{
+		return $this->id;
+	}
+
 	public function getFullName()
 	{
 		return $this->first_name . ' ' . $this->last_name;
