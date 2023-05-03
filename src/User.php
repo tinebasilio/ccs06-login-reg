@@ -25,7 +25,7 @@ class User
 
 	public function getFullName()
 	{
-		return $this->first_name . ' ' . $this->last_name;
+		return $this->first_name . $this->middle_name . $this->last_name;
 	}
 
 	public function getFirstName()
@@ -137,7 +137,7 @@ class User
 
 			$sql = "
 				INSERT INTO users (first_name, middle_name, last_name, email, pass, birthdate, gender, address, contact_number)
-				VALUES ('$first_name', '$middle_name', '$last_name', '$email', '$password', '$birthdate', '$gender', '$address', '$contact_number')
+				VALUES ('$first_name', '$middle_name', '$last_name', '$email', '$birthdate', '$gender', '$address', '$contact_number', '$hashed_password')
 			";
 			$conn->exec($sql);
 			
