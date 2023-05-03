@@ -1,6 +1,9 @@
 <?php
 
 require "config.php";
+require "vendor/autoload.php";
+
+use App\User;
 
 // If the session variable is already set, automatically redirect the user to index page
 if (isset($_SESSION['is_logged_in'])) {
@@ -33,6 +36,12 @@ if (isset($_SESSION['is_logged_in'])) {
 		<button>
 			Login
 		</button>	
+	</div>
+</form>
+
+<form action="register.php" method="GET">
+	<div>
+		<button type="submit">Register</button>
 	</div>
 </form>
 </body>
