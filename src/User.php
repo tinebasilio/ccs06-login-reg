@@ -105,7 +105,6 @@ class User
 			$sql = "
 				SELECT * FROM users
 				WHERE email=:email
-					AND pass=:pass
 				LIMIT 1
 			";
 			$statement = $conn->prepare($sql);
@@ -113,12 +112,12 @@ class User
 				'email' => $email,
 				//'pass' => $password
 			]);
-			$result = $statement->fetchObject('App\User');
+			$user = $statement->fetchObject('App\User');
 
 			// Use password_verify() function to verify the hashed password with the input password
 			if ($user && password_verify($pass, User::hashPassword($pass))) {
-				$pass = User::hashPassword($pass);
-				return $user;
+					$pass = User::hashPassword($pass);
+					return $user;
 			}
 		} catch (PDOException $e) {
 			error_log($e->getMessage());
@@ -127,7 +126,7 @@ class User
 		return null;
 	}
 
-	public static function register($first_name, $middle_name, $last_name, $email, $password, $birthdate, $gender, $address, $contact_number)
+	public static function register($first_name, $middle_name, $last_name, $gender, $birthdate, $address, $contact_number, $email, $password)
 	{
 		global $conn;
 
@@ -136,8 +135,8 @@ class User
 			$hashed_password = self::hashPassword($password);
 
 			$sql = "
-				INSERT INTO users (first_name, middle_name, last_name, email, pass, birthdate, gender, address, contact_number)
-				VALUES ('$first_name', '$middle_name', '$last_name', '$email', '$birthdate', '$gender', '$address', '$contact_number', '$hashed_password')
+				INSERT INTO users (first_name, middle_name, last_name, gender, birthdate, address, contact_number, email, pass)
+				VALUES ('$first_name', '$middle_name', '$last_name', '$gender', '$birthdate', '$address', '$contact_number', '$email', '$hashed_password')
 			";
 			$conn->exec($sql);
 			
@@ -163,12 +162,12 @@ class User
 						first_name=\"{$user['first_name']}\",
 						middle_name=\"{$user['middle_name']}\",
 						last_name=\"{$user['last_name']}\",
-						email=\"{$user['email']}\",
-						pass=\"{$user['pass']}\",
-						birthdate=\"{$user['birthdate']}\",
 						gender=\"{$user['gender']}\",
+						birthdate=\"{$user['birthdate']}\",
 						address=\"{$user['address']}\",
-						contact_number=\"{$user['contact_number']}\"
+						contact_number=\"{$user['contact_number']}\",
+						email=\"{$user['email']}\",
+						pass=\"{$user['pass']}\"
 				";
 				$conn->exec($sql);
 				// echo "<li>Executed SQL query " . $sql;
